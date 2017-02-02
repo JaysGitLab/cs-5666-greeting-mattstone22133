@@ -1,30 +1,49 @@
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import org.junit.Test;
-public class TestHelloWorld{
-	
-	@Test
-	public void testHelloWorldString(){
-		//save the system.in and system.out
-		PrintStream originalOut = System.out;
-		
-		//Set up obj to capture the print stream
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		PrintStream ps = new PrintStream(baos);
-		System.setOut(ps);
-		
-		String inputString = "Hello, World!";
-		
-		HelloWorld.main(null);
-		
-		//TEST
-		assertEquals(" the input stream and output stream did not match", baos.toString().trim(), inputString);
 
-		
-		//restore systemoriginal
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TestHelloWorld {
+	private ByteArrayInputStream bais;
+	private ByteArrayOutputStream baos;
+
+	private PrintStream originalOut = System.out;
+	private InputStream originalIn = System.in;
+
+	@Before
+	public void setTemporaryStreams() {
+		// bais = new ByteArrayInputStream("Hi".getBytes()); //No need for input capture yet
+		baos = new ByteArrayOutputStream();
+
+		System.setIn(bais);
+		System.setOut(new PrintStream(baos));
+	}
+
+	@After
+	public void restoreStreams() {
+		System.setIn(originalIn);
 		System.setOut(originalOut);
 	}
+
+	@Test
+	public void TestNoArg() {
+		HelloWorld.main(null);
+		String correctOutput = "Hello, World!";
+		assertEquals(correctOutput, baos.toString().trim());
+	}
+
+	@Test
+	public void TestNameArg() {
+		String correct = "Hello, Matt!";
+		HelloWorld.main(new String[] { "Matt" });
+
+		assertEquals(correct, baos.toString().trim());
+	}
+
 }
