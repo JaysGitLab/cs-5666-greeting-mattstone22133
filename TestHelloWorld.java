@@ -46,4 +46,12 @@ public class TestHelloWorld {
 		assertEquals(correct, baos.toString().trim());
 	}
 
+	@Test
+	public void TestFirstLetterUpperCase() {
+		String correct = "Hello, Matt!";
+		HelloWorld.main(new String[] { "matt" });
+
+		assertEquals(correct, baos.toString().trim());
+	}
+
 }
