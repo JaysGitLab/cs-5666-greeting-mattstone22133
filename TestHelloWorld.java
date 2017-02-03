@@ -67,5 +67,13 @@ public class TestHelloWorld {
 		HelloWorld.main(new String[]{"-me", "Hal", "Matt" });
 		assertTrue(HelloWorld.getComputerName() != null);
 	}
+	
+	@Test 
+	public void computerResponds(){
+		HelloWorld.main(new String[]{"-me", "Hal", "Matt" });
+		String correct = "Hello Matt.\nMy name is Hal.\nHow are you today, Matt?";
+		assertEquals(correct, baos.toString().trim());
+	
+	}
 
 }
