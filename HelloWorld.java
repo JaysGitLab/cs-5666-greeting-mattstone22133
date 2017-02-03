@@ -17,7 +17,11 @@ public class HelloWorld {
 	private static void printNameAndComp(String[] args) {
 		if(args[0].equals("-me")){
 			setComputerName(args[1]);
-			printName(new String[]{args[2]});
+			//printName(new String[]{args[2]});
+			args[2] = capitalizeName(args[2]);
+			System.out.printf("Hello %s.\n", args[2]);
+			System.out.printf("My name is %s.\n", args[1]);
+			System.out.printf("How are you today, %s?\n", args[2]);
 		}else {
 			System.out.println("Hello, World!");
 		}
