@@ -1,4 +1,4 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -52,6 +52,20 @@ public class TestHelloWorld {
 		HelloWorld.main(new String[] { "matt" });
 
 		assertEquals(correct, baos.toString().trim());
+	}
+	
+	@Test
+	public void TestCmdLineArgParse() {
+		String correct = "Hello, Matt!";
+		HelloWorld.main(new String[] { "matt" });
+
+		assertEquals(correct, baos.toString().trim());
+	}
+	
+	@Test
+	public void TestSaveComputerName(){
+		HelloWorld.main(new String[]{"-me", "Hal", "Matt" });
+		assertTrue(HelloWorld.getComputerName() != null);
 	}
 
 }
