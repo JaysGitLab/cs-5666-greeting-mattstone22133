@@ -5,10 +5,10 @@ public class HelloWorld {
 			if (args.length == 1) {
 				printName(args);
 				return;
-			} else {
+			} else if(args.length > 0) {
 				printNameAndComp(args);
 				return;
-			}
+			} 
 		}
 		System.out.println("Hello, World!");
 
